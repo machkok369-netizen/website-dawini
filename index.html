@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dawini - Your Health, Our Priority" />
+  <title>Dawini | صحتك أولويتنا</title>
+  <style>
+    :root {
+      --primary: #0e7a86;
+      --primary-dark: #0b4d5a;
+      --primary-soft: #eaf7f5;
+      --accent: #28a59b;
+      --bg: #f6f8f7;
+      --text: #12343b;
+      --muted: #59757e;
+      --card: #ffffff;
+      --line: #dfeae9;
+      --warning-bg: #fff8eb;
+      --warning: #d8962d;
+      --dark: #0a3b42;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body[dir="rtl"] {
+      font-family: "Tahoma", "Arial", sans-serif;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(246, 248, 247, 0.94);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1.8rem;
+    }
+
+    .brand .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: inline-block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 5px;
+      border-radius: 999px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary), #2a9d9a);
+      color: white;
+      padding: 80px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      opacity: 0.9;
+    }
+
+    .hero .eyebrow {
+      color: #dff7f3;
+    }
+
+    h1, h2, h3 {
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+      margin: 0 0 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    .hero p {
+      color: #eaf8f8;
+      font-size: 1.12rem;
+      max-width: 560px;
+      margin: 0;
+    }
+
+    .hero-actions {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary-dark);
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 15px 22px;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      opacity: 0.97;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+    }
+
+    .circle {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+    }
+
+    .circle.big {
+      width: 330px;
+      height: 200px;
+      transform: rotate(-18deg);
+    }
+
+    .circle.small {
+      width: 210px;
+      height: 320px;
+      transform: rotate(18deg);
+    }
+
+    .heart {
+      width: 150px;
+      height: 150px;
+      border-radius: 40% 42% 48% 52%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      display: grid;
+      place-items: center;
+      font-size: 5rem;
+      z-index: 1;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(255,255,255,0.96);
+      color: var(--text);
+      padding: 13px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      box-shadow: 0 15px 30px rgba(12, 58, 64, 0.15);
+    }
+
+    .floating-card.top {
+      top: 30px;
+      right: 0;
+    }
+
+    .floating-card.bottom {
+      bottom: 28px;
+      left: 0;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-light {
+      background: white;
+    }
+
+    .section-soft {
+      background: var(--primary-soft);
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 32px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 6px 20px rgba(9, 56, 62, 0.04);
+    }
+
+    .card .icon {
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .policy-grid, .terms-grid, .contact-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .sidebar {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .content {
+      color: var(--text);
+    }
+
+    .content h3 {
+      margin-top: 28px;
+    }
+
+    .content h3:first-child {
+      margin-top: 0;
+    }
+
+    .content p, .content li {
+      color: var(--text);
+    }
+
+    .content ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    .content li {
+      margin: 8px 0;
+    }
+
+    .notice {
+      background: var(--warning-bg);
+      border-left: 4px solid var(--warning);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      color: #5a3e0e;
+    }
+
+    .delete-section {
+      background: var(--dark);
+      color: white;
+    }
+
+    .delete-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .delete-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .delete-box h3 {
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .delete-box p, .delete-box li {
+      color: #d6f0eb;
+    }
+
+    .delete-box ol {
+      padding-left: 20px;
+      margin: 0 0 8px;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-box p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .contact-box strong {
+      display: inline-block;
+      margin-bottom: 4px;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    footer {
+      background: #093d44;
+      color: #d9f0ee;
+      padding: 24px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    [lang="ar"] {
+      direction: rtl;
+    }
+
+    .lang-section {
+      display: none;
+    }
+
+    .lang-section.active {
+      display: block;
+    }
+
+    @media (max-width: 780px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .hero-grid, .three-grid, .policy-grid, .terms-grid, .contact-grid, .contact-box, .delete-boxes {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .hero-visual {
+        min-height: 250px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Dawini</span>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#privacy" class="nav-link">Privacy</a>
+        <a href="#terms" class="nav-link">Terms</a>
+        <a href="#delete-data" class="nav-link">Delete Data</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="lang-switch" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="ar" type="button">AR</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- English -->
+  <div id="lang-en" class="lang-section active" lang="en">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Healthcare across Algeria</div>
+          <h1>Your Health,<br>Our Priority.</h1>
+          <p>Dawini connects patients, doctors, and pharmaceutical partners across Algeria.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#about">Discover Dawini</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="circle big"></div>
+          <div class="circle small"></div>
+          <div class="heart">♥</div>
+          <div class="floating-card top">Live clinic status</div>
+          <div class="floating-card bottom">Appointment confirmed</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-light">
+      <div class="container">
+        <div class="text-center">
+          <div class="eyebrow" style="color: var(--primary);">About Dawini</div>
+          <h2>Connecting patients, doctors, and care providers.</h2>
+        </div>
+
+        <p class="lead">
+          Dawini is a healthcare appointment platform built for the Algerian market. It helps patients find nearby doctors by wilaya or specialty, book appointments, and track live clinic status — while giving doctors tools to manage their schedule, patients, and ratings. Verified pharmaceutical partners can also share product updates directly with doctors through the platform.
+        </p>
+
+        <p class="lead" style="margin-top: 0;">
+          Dawini is developed and operated by <strong>Boukerzaza Boubakeur</strong>, based in Algeria.
+        </p>
+
+        <div class="three-grid">
+          <div class="card">
+            <div class="icon">🧑‍⚕️</div>
+            <h3>For Patients</h3>
+            <p>Search doctors by wilaya or specialty, book appointments, and rate your visit afterward.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🏥</div>
+            <h3>For Doctors</h3>
+            <p>Manage your clinic profile, appointment schedule, and patient reviews in one place.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">💊</div>
+            <h3>For Pharma Partners</h3>
+            <p>Share verified product and supply updates directly with doctors on the platform.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="section-light">
+      <div class="container policy-grid">
+        <div class="sidebar">
+          <div class="eyebrow" style="color: var(--primary);">Privacy Policy</div>
+          <p>This policy explains what information Dawini collects, how it is used, and who it may be shared with.</p>
+        </div>
+
+        <div class="content">
+          <h3>Information We Collect</h3>
+          <p><strong>All users:</strong> email address (or Google account info if you sign in with Google), push notification token, language and theme preferences, and your acceptance of these Terms.</p>
+          <p><strong>Patients:</strong> full name, age, phone number, an optional emergency contact's name/relation/age, GPS location (to find nearby doctors), appointment history, and any ratings or reviews you write.</p>
+          <p><strong>Doctors:</strong> full name and clinic name (English and Arabic), specialty, phone number, visit price, experience, equipment/facility description, bio, clinic location and wilaya, clinic photos, live availability status, appointment capacity, subscription dates, and the name/phone/age of each patient who books with you.</p>
+          <p><strong>Pharma partners:</strong> company name, contact phone, posted product updates, subscription plan, and payment transaction references.</p>
+
+          <h3>How Information Is Used</h3>
+          <p>To operate core features: matching patients with doctors, managing appointments, sending notifications and reminders, processing subscriptions, and displaying ratings.</p>
+
+          <h3>Third Parties We Use</h3>
+          <ul>
+            <li><strong>Google Firebase / Google Cloud</strong> — database, file storage, authentication, and backend hosting</li>
+            <li><strong>Expo</strong> — delivering push notifications</li>
+            <li><strong>Google Sign-In</strong> — optional login method</li>
+            <li><strong>Google Maps</strong> — location search and display</li>
+            <li><strong>Chargily</strong> — payment processing for subscriptions. Dawini does not store your card details — these go directly to the payment processor.</li>
+          </ul>
+
+          <h3>Your Rights</h3>
+          <p>You can review and update most of your information directly in the app. See the <a href="#delete-data">Delete Your Data</a> section below to permanently delete your account.</p>
+
+          <h3>Data Retention</h3>
+          <p>Appointment and transaction records may be retained in de-identified form after account deletion, for accounting and legal record-keeping purposes, and are no longer linked to your identity once your account is deleted.</p>
+
+          <h3>Children's Privacy</h3>
+          <p>Dawini is not directed at children under 18. Patient accounts require the user to be 18 or older, or to have parental/guardian consent.</p>
+
+          <p>Contact <a href="mailto:machkok369@gmail.com">machkok369@gmail.com</a> with any privacy questions or requests.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="section-soft">
+      <div class="container terms-grid">
+        <div class="sidebar">
+          <div class="eyebrow" style="color: var(--primary);">Terms & Conditions</div>
+          <p>Version 1.0 — Effective April 26, 2026</p>
+        </div>
+
+        <div class="content">
+          <h3>1. Acceptance of Terms</h3>
+          <p>By accessing, downloading, or using the Dawini application (“App”), you agree to be bound by these Terms and Conditions. If you do not agree to any part of these terms, you may not use the App.</p>
+
+          <h3>2. Description of Service</h3>
+          <p>Dawini is a healthcare appointment management platform that connects patients with licensed doctors, enables appointment booking and scheduling, and facilitates patient-doctor interactions and rating systems.</p>
+
+          <h3>3. User Eligibility</h3>
+          <p>You must be at least 18 years of age to use this App, or have parental/guardian consent if under 18. You represent and warrant that you have the legal capacity to enter into binding agreements in your jurisdiction. Users must provide accurate, complete, and up-to-date information during registration and are responsible for maintaining the confidentiality of their account credentials.</p>
+
+          <h3>4. User Responsibilities</h3>
+          <p><strong>Patients:</strong> Must provide accurate medical history and health information, honor confirmed appointments or cancel with adequate notice, and not misuse the rating system.</p>
+          <p><strong>Doctors:</strong> Must be licensed and authorized to practice medicine in their jurisdiction, maintain professional standards and ethical obligations, and comply with applicable healthcare regulations and privacy laws.</p>
+
+          <h3>5. Appointment Booking & Cancellation</h3>
+          <p>All appointment bookings are subject to doctor availability. Patients may cancel appointments with at least 24 hours' notice. Repeated no-shows may result in account restrictions or termination of access to the App.</p>
+
+          <div class="notice">
+            <strong>⚠️ 6. Medical Disclaimer</strong><br>
+            Dawini is NOT a substitute for professional medical diagnosis or treatment. The App is a booking and communication platform ONLY. Users should consult qualified healthcare professionals for medical advice. Dawini is not responsible for doctor qualifications, service quality, or medical outcomes. Doctors are independent professionals, not employees of Dawini.
+          </div>
+
+          <h3>7. Limitation of Liability</h3>
+          <p>To the fullest extent permitted by law, Dawini shall not be liable for indirect, incidental, or consequential damages; medical complications or adverse health outcomes; appointment cancellations by doctors; data loss; or any damages exceeding the amount paid by the user for services.</p>
+
+          <h3>8. Prohibited Conduct</h3>
+          <p>Users agree NOT to: provide false or misleading information, access the App through unauthorized means, harass or abuse other users or healthcare providers, manipulate ratings or reviews, share login credentials, use the App for purposes other than legitimate healthcare appointment management, or violate any applicable laws.</p>
+
+          <h3>9. Privacy & Confidentiality</h3>
+          <p>All personal and medical information is protected according to our Privacy Policy above. Healthcare provider-patient relationships maintain professional confidentiality. Medical information is not shared with third parties without explicit consent. Appointment details are accessible only to relevant parties (patient, doctor, admin).</p>
+
+          <h3>10. Termination of Access</h3>
+          <p>Dawini may terminate or suspend user access if a user violates these Terms and Conditions, engages in fraudulent or illegal activity, repeatedly violates policies, or due to security concerns. Upon termination, users lose access to the App and associated features.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="delete-data" class="delete-section">
+      <div class="container">
+        <div class="eyebrow" style="color: #cbf3ee;">Delete Your Data</div>
+        <h2>Delete Your Account &amp; Data</h2>
+        <p style="color: #d8f3ef; max-width: 760px;">
+          You can permanently delete your Dawini account and associated data at any time, in two ways:
+        </p>
+
+        <div class="delete-boxes">
+          <div class="delete-box">
+            <div class="eyebrow" style="color: #d8f3ef; margin: 0 0 8px;">Option 1</div>
+            <h3>In the app</h3>
+            <ol>
+              <li>Open the Dawini app and log in.</li>
+              <li>Tap your profile/account icon (bottom navigation).</li>
+              <li>Tap “Delete Account”.</li>
+              <li>Confirm by entering your password and typing DELETE.</li>
+            </ol>
+            <p>This immediately and permanently deletes your account, login credentials, and profile data.</p>
+          </div>
+
+          <div class="delete-box">
+            <div class="eyebrow" style="color: #d8f3ef; margin: 0 0 8px;">Option 2</div>
+            <h3>By email</h3>
+            <p>If you no longer have the app, send an email to <a href="mailto:machkok369@gmail.com?subject=Delete%20My%20Data" style="color: #d8f3ef;">machkok369@gmail.com</a> from the address associated with your account.</p>
+            <p>Use the subject line “Delete My Data,” including the email used to register and whether you were a Patient, Doctor, or Pharma partner.</p>
+            <p>We will process your request within 30 days and confirm by email once complete.</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 24px; color: #d8f3ef;">
+          See the Data Retention note above for what may be retained in de-identified form.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="section-light">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow" style="color: var(--primary);">Contact</div>
+          <h2>Developer contact information</h2>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <p><strong>Developer</strong><br>Boukerzaza Boubakeur</p>
+            <p><strong>Based in</strong><br>Algeria</p>
+          </div>
+
+          <div>
+            <p><strong>Email</strong><br><a href="mailto:machkok369@gmail.com">machkok369@gmail.com</a></p>
+            <p><strong>Phone</strong><br><a href="tel:+213669214892">0669214892</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Arabic -->
+  <div id="lang-ar" class="lang-section" lang="ar">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">الرعاية الصحية في الجزائر</div>
+          <h1>صحتك،<br>أولويتنا.</h1>
+          <p>داويني يربط المرضى والأطباء وشركاء الصيدلة في جميع أنحاء الجزائر.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#about-ar">اكتشف داويني</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="circle big"></div>
+          <div class="circle small"></div>
+          <div class="heart">♥</div>
+          <div class="floating-card top">حالة العيادة المباشرة</div>
+          <div class="floating-card bottom">تم تأكيد الموعد</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about-ar" class="section-light">
+      <div class="container">
+        <div class="text-center">
+          <div class="eyebrow" style="color: var(--primary);">عن داويني</div>
+          <h2>ربط المرضى والأطباء ومقدمي الرعاية.</h2>
+        </div>
+
+        <p class="lead">
+          داويني هو منصة لحجز المواعيد الصحية موجهة للسوق الجزائري. تساعد المرضى على العثور على الأطباء القريبين حسب الولاية أو التخصص، وحجز المواعيد، ومتابعة حالة العيادة مباشرة — كما تمنح الأطباء أدوات لإدارة جدولهم، مرضاهم، وتقييماتهم. ويمكن لشركاء الصيدلة الموثوقين أيضًا مشاركة تحديثات المنتجات مباشرة مع الأطباء عبر المنصة.
+        </p>
+
+        <p class="lead" style="margin-top: 0;">
+          يتم تطوير داويني وتشغيله من قبل <strong>بوكرزازا بوبكائر</strong>، ومقره في الجزائر.
+        </p>
+
+        <div class="three-grid">
+          <div class="card">
+            <div class="icon">🧑‍⚕️</div>
+            <h3>للمرضى</h3>
+            <p>ابحث عن الأطباء حسب الولاية أو التخصص، واحجز المواعيد، ثم قيّم زيارتك لاحقًا.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🏥</div>
+            <h3>للأطباء</h3>
+            <p>أدر ملف عيادتك، جدول المواعيد، ومراجعات المرضى في مكان واحد.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">💊</div>
+            <h3>لشركاء الصيدلة</h3>
+            <p>شارك تحديثات المنتجات والمخزون الموثقة مباشرة مع الأطباء عبر المنصة.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy-ar" class="section-light">
+      <div class="container policy-grid">
+        <div class="sidebar">
+          <div class="eyebrow" style="color: var(--primary);">سياسة الخصوصية</div>
+          <p>تشرح هذه السياسة المعلومات التي يجمعها داويني وكيفية استخدامها ومن قد تتم مشاركة المعلومات معه.</p>
+        </div>
+
+        <div class="content">
+          <h3>المعلومات التي نجمعها</h3>
+          <p><strong>جميع المستخدمين:</strong> عنوان البريد الإلكتروني (أو معلومات حساب Google إذا قمت بتسجيل الدخول عبر Google)، رمز إشعارات الدفع، تفضيلات اللغة والمظهر، وقبولك بهذه الشروط.</p>
+          <p><strong>المرضى:</strong> الاسم الكامل، العمر، رقم الهاتف، اسم/علاقة/عمر جهة الاتصال الطارئة الاختيارية، موقع GPS للعثور على الأطباء القريبين، سجل المواعيد، وأي تقييمات أو مراجعات تكتبها.</p>
+          <p><strong>الأطباء:</strong> الاسم الكامل واسم العيادة (بالإنجليزية والعربية)، التخصص، رقم الهاتف، سعر الزيارة، الخبرة، وصف المعدات/المرافق، السيرة الذاتية، موقع العيادة والولاية، صور العيادة، حالة التوفر المباشرة، سعة المواعيد، تواريخ الاشتراك، واسم/هاتف/عمر كل مريض يحجز معك.</p>
+          <p><strong>شركاء الصيدلة:</strong> اسم الشركة، الهاتف للتواصل، تحديثات المنتجات المنشورة، خطة الاشتراك، ومراجع المعاملات المالية.</p>
+
+          <h3>كيف تُستخدم المعلومات</h3>
+          <p>لتشغيل الميزات الأساسية: مطابقة المرضى بالأطباء، إدارة المواعيد، إرسال الإشعارات والتذكيرات، معالجة الاشتراكات، وعرض التقييمات.</p>
+
+          <h3>الجهات الخارجية التي نستخدمها</h3>
+          <ul>
+            <li><strong>Google Firebase / Google Cloud</strong> — قاعدة البيانات، تخزين الملفات، المصادقة، واستضافة البنية الخلفية</li>
+            <li><strong>Expo</strong> — توصيل إشعارات الدفع</li>
+            <li><strong>Google Sign-In</strong> — طريقة تسجيل دخول اختيارية</li>
+            <li><strong>Google Maps</strong> — بحث الموقع وعرضه</li>
+            <li><strong>Chargily</strong> — معالجة المدفوعات للاشتراكات. لا يخزن داويني تفاصيل بطاقتك — فهذه تذهب مباشرة إلى معالج الدفع.</li>
+          </ul>
+
+          <h3>حقوقك</h3>
+          <p>يمكنك مراجعة معظم بياناتك وتحديثها مباشرة داخل التطبيق. انظر قسم <a href="#delete-data-ar">حذف بياناتك</a> أدناه لحذف حسابك بشكل دائم.</p>
+
+          <h3>احتفاظ البيانات</h3>
+          <p>قد يتم الاحتفاظ بسجلات المواعيد والمعاملات بشكل مجهول الهوية بعد حذف الحساب، لأغراض المحاسبة والاحتفاظ بالسجلات القانونية، ولا تكون مرتبطة بهويتك بمجرد حذف الحساب.</p>
+
+          <h3>خصوصية الأطفال</h3>
+          <p>لا يستهدف داويني الأطفال دون 18 عامًا. تتطلب حسابات المرضى أن يكون المستخدم 18 عامًا أو أكثر، أو أن يكون لديه موافقة الوالد/الوصي.</p>
+
+          <p>راسلنا على <a href="mailto:machkok369@gmail.com">machkok369@gmail.com</a> لأي أسئلة أو طلبات تخص الخصوصية.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms-ar" class="section-soft">
+      <div class="container terms-grid">
+        <div class="sidebar">
+          <div class="eyebrow" style="color: var(--primary);">الشروط والأحكام</div>
+          <p>الإصدار 1.0 — ساري منذ 26 أبريل 2026</p>
+        </div>
+
+        <div class="content">
+          <h3>1. قبول الشروط</h3>
+          <p>بإدخالك أو تنزيلك أو استخدامك لتطبيق داويني (“التطبيق”) فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي جزء من هذه الشروط، فلا يجوز لك استخدام التطبيق.</p>
+
+          <h3>2. وصف الخدمة</h3>
+          <p>داويني هو منصة لإدارة المواعيد الطبية تربط المرضى بالأطباء المرخصين، وتتيح حجز المواعيد والجدولة، وتسهل التفاعل بين المريض والطبيب ونظام التقييم.</p>
+
+          <h3>3. أهلية المستخدم</h3>
+          <p>يجب أن تكون في سن 18 عامًا على الأقل لاستخدام هذا التطبيق، أو أن يكون لديك موافقة الوالد/الوصي إذا كنت أقل من 18 عامًا. أنت تعلن وتضمن أن لديك القدرة القانونية لإبرام العقود في ولايتك القضائية. يجب على المستخدمين تقديم معلومات دقيقة وكاملة ومحدثة أثناء التسجيل، وهم مسؤولون عن الحفاظ على سرية بيانات حساباتهم.</p>
+
+          <h3>4. مسؤوليات المستخدم</h3>
+          <p><strong>المرضى:</strong> يجب عليهم تقديم التاريخ الطبي والمعلومات الصحية بدقة، احترام المواعيد المؤكدة أو إلغاءها في وقت مناسب، وعدم إساءة استخدام نظام التقييم.</p>
+          <p><strong>الأطباء:</strong> يجب أن يكونوا مرخصين ومصرح لهم بممارسة الطب في ولايتهم القضائية، وأن يحافظوا على المعايير المهنية والالتزامات الأخلاقية، وأن يلتزموا بالتشريعات الصحية ذات الصلة وقوانين الخصوصية.</p>
+
+          <h3>5. حجز المواعيد والإلغاء</h3>
+          <p>تخضع جميع حجوزات المواعيد لتوفر الطبيب. يجوز للمرضى إلغاء المواعيد قبل 24 ساعة على الأقل. قد يؤدي تكرار عدم الحضور إلى فرض قيود أو إنهاء الوصول إلى التطبيق.</p>
+
+          <div class="notice">
+            <strong>⚠️ 6. إخلاء المسؤولية الطبية</strong><br>
+            داويني ليس بديلاً للتشخيص الطبي أو العلاج الطبي المهني. التطبيق هو منصة للحجز والتواصل فقط. يجب على المستخدمين استشارة أطباء مؤهلين للحصول على المشورة الطبية. لا يتحمل داويني مسؤولية مؤهلات الأطباء أو جودة الخدمة أو النتائج الطبية. الأطباء مستقلون وليسوا موظفين في داويني.
+          </div>
+
+          <h3>7. تحديد المسؤولية</h3>
+          <p>بقدر ما تسمح به القوانين المعمول بها، لا يتحمل داويني المسؤولية عن الأضرار غير المباشرة أو العرضية أو التبعية؛ أو المضاعفات الطبية أو النتائج الصحية السلبية؛ أو إلغاء المواعيد من قبل الأطباء؛ أو فقدان البيانات؛ أو أي أضرار تتجاوز المبلغ المدفوع من المستخدم مقابل الخدمات.</p>
+
+          <h3>8. السلوك المحظور</h3>
+          <p>يوافق المستخدمون على عدم: تقديم معلومات كاذبة أو مضللة، أو الوصول إلى التطبيق بوسائل غير مصرح بها، أو الترهيب أو الإساءة إلى المستخدمين أو مقدمي الرعاية الصحية، أو التلاعب بالتقييمات أو المراجعات، أو مشاركة بيانات تسجيل الدخول، أو استخدام التطبيق لأغراض غير إدارة مواعيد الرعاية الصحية المشروعة، أو انتهاك أي قوانين سارية.</p>
+
+          <h3>9. الخصوصية والسرية</h3>
+          <p>جميع المعلومات الشخصية والطبية محمية وفق سياسة الخصوصية المذكورة أعلاه. تحافظ العلاقات بين مقدمي الرعاية الصحية والمرضى على السرية المهنية. لا تتم مشاركة المعلومات الطبية مع أطراف خارجية دون موافقة صريحة. تكون تفاصيل المواعيد متاحة فقط للأطراف ذات الصلة (المريض، الطبيب، المسؤول).</p>
+
+          <h3>10. إنهاء الوصول</h3>
+          <p>يجوز لداؤيني إنهاء أو تعليق وصول المستخدم إذا انتهك هذه الشروط والأحكام، أو شارك في أنشطة احتيالية أو غير قانونية، أو خالف السياسات بشكل متكرر، أو بسبب مخاوف أمنية. عند الإنهاء، يفقد المستخدم الوصول إلى التطبيق والوظائف المرتبطة به.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="delete-data-ar" class="delete-section">
+      <div class="container">
+        <div class="eyebrow" style="color: #cbf3ee;">حذف بياناتك</div>
+        <h2>حذف حسابك وبياناتك</h2>
+        <p style="color: #d8f3ef; max-width: 760px;">
+          يمكنك حذف حساب داويني وبياناتك المرتبطة بشكل دائم في أي وقت، بطرقٍ متعدّدة:
+        </p>
+
+        <div class="delete-boxes">
+          <div class="delete-box">
+            <div class="eyebrow" style="color: #d8f3ef; margin: 0 0 8px;">الخيار 1</div>
+            <h3>من داخل التطبيق</h3>
+            <ol>
+              <li>افتح تطبيق داويني وقم بتسجيل الدخول.</li>
+              <li>اضغط على أيقونة ملفك الشخصي/الحساب (التنقل السفلي).</li>
+              <li>اضغط على “Delete Account” أو “حذف الحساب”.</li>
+              <li>أكد باستخدام كلمة المرور وكتابة DELETE.</li>
+            </ol>
+            <p>هذا يحذف الحساب وبيانات تسجيل الدخول والملف الشخصي بشكل فوري ودائم.</p>
+          </div>
+
+          <div class="delete-box">
+            <div class="eyebrow" style="color: #d8f3ef; margin: 0 0 8px;">الخيار 2</div>
+            <h3>عن طريق البريد الإلكتروني</h3>
+            <p>إذا لم تعد تمتلك التطبيق، أرسل بريدًا إلكترونيًا إلى <a href="mailto:machkok369@gmail.com?subject=Delete%20My%20Data" style="color: #d8f3ef;">machkok369@gmail.com</a> من عنوان البريد المرتبط بحسابك.</p>
+            <p>استخدم عنوان الموضوع “Delete My Data” أو “احذف بياناتي”، وضمّن البريد الذي استخدمته للتسجيل سواء كنت مريضًا أو طبيبًا أو شريك صيدلة.</p>
+            <p>سنقوم بمعالجة طلبك خلال 30 يومًا ونؤكد لك عبر البريد الإلكتروني عند الانتهاء.</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 24px; color: #d8f3ef;">
+          انظر ملاحظة الاحتفاظ بالبيانات أعلاه لمعرفة ما قد يظل محفوظًا بشكل مجهول الهوية.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact-ar" class="section-light">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow" style="color: var(--primary);">تواصل</div>
+          <h2>معلومات التواصل للمطور</h2>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <p><strong>المطور</strong><br>بوكرزازا بوبكائر</p>
+            <p><strong>مقره</strong><br>الجزائر</p>
+          </div>
+
+          <div>
+            <p><strong>البريد الإلكتروني</strong><br><a href="mailto:machkok369@gmail.com">machkok369@gmail.com</a></p>
+            <p><strong>الهاتف</strong><br><a href="tel:+213669214892">0669214892</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Dawini. All rights reserved.</span>
+      <span>Your Health, Our Priority. | صحتك أولويتنا.</span>
+    </div>
+  </footer>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const sections = document.querySelectorAll('.lang-section');
+
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const lang = button.dataset.lang;
+
+        langButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+
+        sections.forEach(section => {
+          const show = section.id === `lang-${lang}`;
+          section.classList.toggle('active', show);
+        });
+
+        document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.lang = lang;
+      });
+    });
+  </script>
+</body>
+</html>
